@@ -2,14 +2,13 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Quantum CNC Calculator</title>
+    <title>Kalkulator CNC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00f4e2">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="icon-192.png">
-    <!-- ... tu reszta stylów z poprzedniej wersji ... -->
     <style>
         :root {
             --primary: #00f4e2;
@@ -29,6 +28,30 @@
             align-items: center;
         }
 
+        .header {
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00f4e2;
+            background: linear-gradient(270deg, #00f4e2, #7c4dff, #00f4e2);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnimation 8s ease infinite;
+            text-shadow: 0 0 2px #00f4e2, 0 0 4px #7c4dff, 0 0 6px #00f4e2;
+            letter-spacing: 2px;
+            user-select: none;
+        }
+
+        @keyframes gradientAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+
+
         .container {
             width: 100%;
             max-width: 460px;
@@ -42,7 +65,7 @@
             backdrop-filter: blur(18px);
             box-shadow: 0 22px 60px -14px rgba(0, 244, 226, 0.13);
             border: 3px solid rgba(0, 244, 226, 0.22);
-            margin-top: 2rem;
+            margin-top: 0.5rem;
             margin-bottom: 2rem;
             transition: border-color 0.3s;
         }
@@ -113,6 +136,34 @@
             border: 1px solid rgba(0, 244, 226, 0.10);
         }
 
+        .clear-button {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 220px;
+            padding: 0.6rem 1rem;
+            background: rgba(0, 244, 226, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .clear-button:hover {
+            background: rgba(0, 244, 226, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
         @media (max-width: 600px) {
             .container {
                 max-width: 98vw;
@@ -141,6 +192,8 @@
     </style>
 </head>
 <body>
+    <div class="header">Kalkulator CNC</div>
+
     <div class="container">
         <!-- Moduł 1: Obroty -->
         <div class="module">
@@ -187,7 +240,11 @@
             </div>
             <div class="result" id="centerFeedResult"></div>
         </div>
+
+        <button class="clear-button" id="clearButton">Wyczyść</button>
     </div>
+
+    <div class="footer">Copyright &copy; 2025 Damian Drewniak</div>
 
     <script>
         const inputs = document.querySelectorAll('input');
@@ -196,6 +253,17 @@
         // Automatyczna aktualizacja średnicy narzędzia
         document.getElementById('diameter').addEventListener('input', function() {
             document.getElementById('toolDia').value = this.value;
+        });
+
+        // Przycisk wyczyść
+        document.getElementById('clearButton').addEventListener('click', function() {
+            inputs.forEach(input => {
+                input.value = '';
+                if (input.id === 'toolDia') input.value = '';
+            });
+            document.getElementById('rpmResult').textContent = '';
+            document.getElementById('feedResult').textContent = '';
+            document.getElementById('centerFeedResult').textContent = '';
         });
 
         function calculateAll() {
