@@ -382,11 +382,11 @@
                     <!-- Pola dla wałka -->
                     <div id="rodFields" class="shape-fields">
                         <div class="input-group">
-                            <label>Średnica zewnętrzna d [mm]</label>
+                            <label>Średnica zewnętrzna [mm]</label>
                             <input type="number" id="rodDiameter" step="0.1" oninput="calculateWeight()">
                         </div>
                         <div class="input-group">
-                            <label>Długość L [mm]</label>
+                            <label>Długość [mm]</label>
                             <input type="number" id="rodLength" step="0.1" oninput="calculateWeight()">
                         </div>
                     </div>
@@ -394,15 +394,15 @@
                     <!-- Pola dla rury -->
                     <div id="tubeFields" class="shape-fields" style="display: none;">
                         <div class="input-group">
-                            <label>Średnica zewnętrzna d_zew [mm]</label>
+                            <label>Średnica zewnętrzna [mm]</label>
                             <input type="number" id="tubeOuterDia" step="0.1" oninput="calculateWeight()">
                         </div>
                         <div class="input-group">
-                            <label>Średnica wewnętrzna d_wew [mm]</label>
+                            <label>Średnica wewnętrzna [mm]</label>
                             <input type="number" id="tubeInnerDia" step="0.1" oninput="calculateWeight()">
                         </div>
                         <div class="input-group">
-                            <label>Długość L [mm]</label>
+                            <label>Długość [mm]</label>
                             <input type="number" id="tubeLength" step="0.1" oninput="calculateWeight()">
                         </div>
                     </div>
@@ -410,15 +410,15 @@
                     <!-- Pola dla płaskownika -->
                     <div id="flatFields" class="shape-fields" style="display: none;">
                         <div class="input-group">
-                            <label>Wymiar a [mm]</label>
+                            <label>Wymiar A [mm]</label>
                             <input type="number" id="flatA" step="0.1" oninput="calculateWeight()">
                         </div>
                         <div class="input-group">
-                            <label>Wymiar b [mm]</label>
+                            <label>Wymiar B [mm]</label>
                             <input type="number" id="flatB" step="0.1" oninput="calculateWeight()">
                         </div>
                         <div class="input-group">
-                            <label>Długość L [mm]</label>
+                            <label>Długość [mm]</label>
                             <input type="number" id="flatLength" step="0.1" oninput="calculateWeight()">
                         </div>
                     </div>
@@ -576,7 +576,7 @@
             for (const [materialName, materialData] of Object.entries(materials)) {
                 const option = document.createElement('option');
                 option.value = materialName;
-                option.textContent = `${materialName} (ρ=${materialData.density} g/cm³)`;
+                option.textContent = `${materialName}`;
                 materialSelect.appendChild(option);
             }
         }
